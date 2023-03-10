@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class EasyMoocApplication {
+public class BaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EasyMoocApplication.class, args);
+		SpringApplication.run(BaseApplication.class, args);
 	}
 
 }
