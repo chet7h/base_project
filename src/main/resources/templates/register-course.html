@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="chet7h">
+	<meta th:name="_csrf" th:content="${_csrf.token}" />
+	<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+
+	<title>EASY MOOC - register course</title>
+
+	<!-- Custom fonts for this template-->
+	<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+	<link th:href="@{/css/register-course.css}" rel="stylesheet">
+
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<th:block th:insert="fragments/menu.html :: side-bar"></th:block>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<th:block th:insert="fragments/menu.html :: top-bar"></th:block>
+
+				<!-- Begin Page Content -->
+				<!-- MultiStep Form -->
+				<div class="container-fluid">
+					<main>
+						<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+							<div class="container-xl px-4">
+								<div class="page-header-content pt-4">
+									<div class="row align-items-center justify-content-between">
+										<div class="col-auto mt-4">
+											<h1 class="page-header-title" th:text="${course.courseName}">
+												Wizard
+											</h1>
+											<div class="page-header-subtitle">Khóa học sẽ bắt đầu khi mọi thủ tục hoàn
+												tất</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</header>
+						<!-- Main page content-->
+						<div class="container-xl px-4 mt-n10" id="register">
+							<!-- Wizard card example with navigation-->
+							<div class="card" th:fragment="register-step">
+								<form th:action="@{/register-course}" method="post" th:object="${course}"
+									class="needs-validation">
+									<div class="card-header border-bottom">
+										<!-- Wizard navigation-->
+										<div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard"
+											id="cardTab" role="tablist">
+											<!-- Wizard navigation item 1-->
+											<div class="nav-item nav-link" th:classappend="*{cssItem1}">
+												<div class="wizard-step-icon">1</div>
+												<div class="wizard-step-text">
+													<div class="wizard-step-text-name">Account Setup</div>
+													<div class="wizard-step-text-details" th:text="*{messageItem1 == '' || messageItem1 == null? 'Thông tin để hệ thống đăng
+														nhập các khóa học' : messageItem1}">
+													</div>
+												</div>
+											</div>
+											<!-- Wizard navigation item 2-->
+											<div class="nav-item nav-link" th:classappend="*{cssItem2}">
+												<div class="wizard-step-icon">2</div>
+												<div class="wizard-step-text">
+													<div class="wizard-step-text-name">Discount Code</div>
+													<div class="wizard-step-text-details" th:text="*{messageItem2 == '' || messageItem2 == null? 'Mã được chia sẻ bới một số
+														thành viên phát triển app' : messageItem2}"></div>
+												</div>
+											</div>
+											<!-- Wizard navigation item 3-->
+											<div class="nav-item nav-link" th:classappend="*{cssItem3}">
+												<div class="wizard-step-icon">3</div>
+												<div class="wizard-step-text">
+													<div class="wizard-step-text-name">Payment</div>
+													<div class="wizard-step-text-details">Thông tin thanh toán cho khóa
+														học
+													</div>
+												</div>
+											</div>
+											<!-- Wizard navigation item 4-->
+											<div class="nav-item nav-link" th:classappend="*{cssItem4}">
+												<div class="wizard-step-icon">4</div>
+												<div class="wizard-step-text">
+													<div class="wizard-step-text-name">Review &amp; Submit</div>
+													<div class="wizard-step-text-details">Review and submit changes
+													</div>
+												</div>
+												</a>
+											</div>
+										</div>
+										<div class="card-body">
+											<div class="tab-content" id="cardTabContent">
+												<!-- Wizard tab pane item 1-->
+												<div class="tab-pane py-5 py-xl-5 fade "
+													th:classappend="*{activePage == '1'} ? 'active show' : ''"
+													id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+													<div class="row justify-content-center">
+														<div class="col-xxl-6 col-xl-8">
+															<h3 class="text-primary">Step 1</h3>
+															<h5 class="card-title mb-4">Điền thông tin đăng nhập của
+																khóa học
+															</h5>
+
+															<div class="mb-3">
+																<label class="small mb-1"
+																	for="inputEmailAddress">Username</label>
+																<input class="form-control" name="username" type="email"
+																	autocomplete="false" id="username"
+																	th:value="*{username}" required
+																	placeholder="Enter Username login coursera.org">
+															</div>
+															<div class="mb-3">
+																<label class="small mb-1"
+																	for="inputUsername">Password</label>
+																<input class="form-control" name="password" type="text"
+																	autocomplete="false" id="password"
+																	th:value="*{password}" required
+																	placeholder="Enter Password login coursera.org">
+															</div>
+
+															<hr class="my-4">
+															<div class="d-flex justify-content-between">
+																<button class="btn btn-light disabled " type="button"
+																	id="Previous1" disabled="">Previous</button>
+																<button class="btn btn-primary register-step"
+																	type="button" data-category="1n"
+																	id="next1">Next</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- Wizard tab pane item 2-->
+												<div class="tab-pane py-5 py-xl-5 fade"
+													th:classappend="*{activePage == '2'} ? 'active show' : ''"
+													id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+													<div class="row justify-content-center">
+														<div class="col-xxl-6 col-xl-8">
+															<h3 class="text-primary">Step 2</h3>
+															<h5 class="card-title mb-4">Mã giảm giá</h5>
+															<div class="mb-3">
+																<label class="small mb-1"
+																	for="inputEmailAddress">Discount Code</label>
+																<input class="form-control" type="textbox"
+																	name="discountCode" id="discountCode"
+																	th:value="*{discountCode}"
+																	placeholder="Enter Discount Code">
+															</div>
+
+
+															<hr class="my-4">
+															<div class="d-flex justify-content-between">
+																<button class="btn btn-light register-step"
+																	type="button" data-category="2p"
+																	id="Previous1">Previous</button>
+																<button class="btn btn-primary register-step"
+																	type="button" data-category="2n"
+																	id="next1">Next</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- Wizard tab pane item 3-->
+												<div class="tab-pane py-5 py-xl-5 fade"
+													th:classappend="*{activePage == '3'} ? 'active show' : ''"
+													id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+													<div class="row justify-content-center"
+														th:if="*{cssItem1 == 'danger'}" )>
+														<div class="col-xxl-6 col-xl-8">
+															<h3 class="text-primary">Step 3 không thể thực hiện do Step
+																1
+																đang điền thông tin sai</h3>
+															<hr class="my-4">
+															<div class="d-flex justify-content-between">
+																<button class="btn btn-light register-step"
+																	id="previous3" data-category="3p"
+																	type="button">Previous</button>
+																<button class="btn btn-primary register-step"
+																	type="button" data-category="3n"
+																	id="next3">Next</button>
+															</div>
+														</div>
+													</div>
+													<div class="row justify-content-center"
+														th:if="*{cssItem1 != 'danger'}">
+														<div class="col-xxl-6 col-xl-8">
+															<h3 class="text-primary">Step 3</h3>
+															<h5 class="card-title mb-4">Thông tin thanh toán</h5>
+															<p class="mb-4">Quét
+																mã QR
+																để thanh toán <strong th:text="*{price}"></strong> và
+																chuyển khoản với nội dung <strong
+																	th:text="*{otp}"></strong>
+															</p>
+															<div class="row">
+																<img th:src="'https://img.vietqr.io/image/970423-00085118001-qr_only.png?amount=' +*{price} + '&addInfo=' + *{otp} +''"
+																	style="width:50%;">
+															</div>
+															<hr class="my-4">
+															<input type="hidden" name="otp" th:value="*{otp}" />
+															<input type="hidden" name="price" th:value="*{price}" />
+															<input type="hidden" name="courseCode"
+																th:value="*{courseCode}" />
+															<input type="hidden" name="courseName"
+																th:value="*{courseName}" />
+
+															<div class="d-flex justify-content-between">
+																<button class="btn btn-light register-step"
+																	id="previous3" data-category="3p"
+																	type="button">Previous</button>
+																<button class="btn btn-primary register-step"
+																	type="button" data-category="3n"
+																	id="next3">Next</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- Wizard tab pane item 4-->
+												<div class="tab-pane py-5 py-xl-5 fade"
+													th:classappend="*{activePage == '4'} ? 'active show' : ''"
+													id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+													<div class="row justify-content-center">
+														<div class="col-xxl-6 col-xl-8">
+															<h3 class="text-primary">Step 4</h3>
+															<h5 class="card-title mb-4">Review the following information
+																and
+																submit</h5>
+															<div class="row small text-muted">
+																<div class="col-sm-3 text-truncate"><em>Username:</em>
+																</div>
+																<div class="col" th:text="*{username}">username</div>
+															</div>
+															<div class="row small text-muted">
+																<div class="col-sm-3 text-truncate"><em>Password:</em>
+																</div>
+																<div class="col" th:text="*{password}">Password</div>
+															</div>
+															<div class="row small text-muted">
+																<div class="col-sm-3 text-truncate"><em>Discount
+																		Code:</em>
+																</div>
+																<div class="col" th:text="*{discountCode}">discountCode
+																</div>
+															</div>
+															<div class="row small text-muted">
+																<div class="col-sm-3 text-truncate"><em>Price:</em>
+																</div>
+																<div class="col" th:text="*{price}">price</div>
+															</div>
+															<div class="row small text-muted">
+																<div class="col-sm-3 text-truncate"><em>Payment
+																		code:</em>
+																</div>
+																<div class="col" th:text="*{otp}">Payment code</div>
+															</div>
+															<hr class="my-4">
+															<div class="d-flex justify-content-between">
+																<button class="btn btn-light register-step"
+																	type="button" data-category="4p"
+																	id="Previous4">Previous</button>
+																<input type="submit"
+																	class="btn btn-primary register-step" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<script>
+											var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+											var csrfToken = $("meta[name='_csrf']").attr("content");
+											var headers = {};
+											headers[csrfHeader] = csrfToken;
+											$(document).ready(function () {
+
+												$(".register-step").click(function () {
+													/*<![CDATA[*/
+													let formData = {
+														courseCode: "[[*{courseCode}]]",
+
+														cssItem1: "[[*{cssItem1}]]",
+														cssItem2: "[[*{cssItem2}]]",
+														cssItem3: "[[*{cssItem3}]]",
+														cssItem4: "[[*{cssItem4}]]",
+
+														messageItem1: "[[*{messageItem1}]]",
+														messageItem2: "[[*{messageItem2}]]",
+
+														btnClick: $(this).data('category'),
+
+														username: $("#username").val(),
+														password: $("#password").val(),
+
+														discountCode: $("#discountCode").val(),
+
+														price: "[[*{price}]]",
+														otp: "[[*{otp}]]",
+
+														courseName: "[[*{courseName}]]"
+													}
+													/*]]>*/
+													$.ajax({
+														url: "[[@{/register-step}]]",
+														type: 'POST',
+														headers: headers,
+														contentType: "application/json",
+														data: JSON.stringify(formData),
+														dataType: 'html',
+														success: function (result) {
+															$("#register").html(result);
+														}
+													});
+												});
+											});
+										</script>
+									</div>
+								</form>
+							</div>
+					</main>
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<th:block th:insert="fragments/menu.html :: footer"></th:block>
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+</body>
+
+</html>
